@@ -1,0 +1,32 @@
+version: '2.1'
+
+services:
+  hackthon_app:
+    container_name: node_app
+    build:
+      context: ../
+      dockerfile: docker_config/Dockerfile
+    links:
+      - database
+    volumes:
+      - ../:/usr/app
+    ports:
+      - '3000:3000'
+    env_file:
+      - ../.env
+    environment:
+      - MONGODB_URI_LOCAL=mongodb://database:27017/paystack
+      - HOST=0.0.0.0
+    entrypoint:
+      - /usr/app/docker_config/entrypoint.sh
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    container_name: mongo_db
+    image: mongo:latest
+    healthcheck:
+      test:  echo 'db.runCommand("ping").ok' | mongo database:27017/paystack --quiet
+      interval: 5s
+      timeout: 10s
+      retries: 5
