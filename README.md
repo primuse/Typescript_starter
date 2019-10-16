@@ -68,5 +68,4 @@ Don't forget to return the `MONGO_URI_LOCAL` to your local test database (if you
 
 
 ## Deploying to Amazon Web Services
-Visit https://github.com/primuse/Typescript_starter_deployment_scripts#building-and-running-the-application for steps to deploy.
-
+Visit https://github.com/primuse/Typescript_starter_deployment_scripts#building-and-running-the-application for steps to deploy
